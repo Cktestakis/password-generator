@@ -45,25 +45,28 @@ generateBtn.addEventListener("click", writePassword)
 // Generating password function 
 function generatePassword() {
 
-    var length = prompt("How many would you like in your random password? (between 8 - 128)");
-    if(isNaN(length)){
-        alert("You must input a number!");
-        return generatePassword()
-    }
-    if(length < 8 || length > 128) {
-        alert("Please choose a number between 8 - 128!");
-        return generatePassword()
-    }
-    // This will ask the user if they would like to use uppercase, lowercase, numbers, and characters
-    var hasNumbers = confirm("Would you like to include numbers?");
-    var hasUppercaseLetters = confirm("Would you like to include uppercase letters?");
-    var hasLowercaseLetters = confirm("Would you like to include lowercase letters?");
-    var hasCharacters = confirm("Would you like to include characters?");
+    var length; 
+    var hasNumbers;
+    var hasUppercaseLetters;
+    var hasLowercaseLetters;
+    var hasCharacters;
+    var result = "";
 
-    if(!hasNumbers && !hasUppercaseLetters && !hasLowercaseLetters && !hasCharacters) {
-        alert("You must at least choose 1 character type");
-        return generatePassword.join()
+    do{
+       length = prompt("How many would you like in your random password? (between 8 - 128)");
     }
+    while(isNaN(length) || length < 8 || length > 128);
+
+
+    // This will ask the user if they would like to use uppercase, lowercase, numbers, and characters
+    do{
+       hasNumbers = confirm("Would you like to include numbers?");
+       hasUppercaseLetters = confirm("Would you like to include uppercase letters?");
+       hasLowercaseLetters = confirm("Would you like to include lowercase letters?");
+       hasCharacters = confirm("Would you like to include characters?");
+    }
+    while(!hasNumbers && !hasUppercaseLetters && !hasLowercaseLetters && !hasCharacters);
+
     if(hasNumbers) {
         characterChosen += numbers
     }
@@ -76,13 +79,18 @@ function generatePassword() {
     if(hasCharacters) {
         characterChosen += characters
     }
+    var result = "";
+    for(var i = 0; i < length; i++) {
+        var c = Math.floor(Math.random() * characterChosen.length);
+        result += characterChosen[c];
 
+    }
+    return result;
 }
+
+
 var randomPassword =[]
 
-for(var i = 0; i < length; i++) {
-    result += characterChosen.charAt[Math.floor(Math.random() * characterChosen.length)];
 
-}
     
    generateBtn.addEventListener("click", writePassword)
